@@ -31,59 +31,7 @@ support](https://cloud.google.com/support).**
     accidentally committing credentials to your release artifact:
 
     ```text
-    # Ignore generated credentials from google-github-actions/auth
-    gha-creds-*.json
-    ```
-
--   To use the `bq` or `gsutil` tools, use the Google Cloud SDK version 390.0.0
-    or newer.
-
--   This action runs using Node 20. Use a [runner
-    version](https://github.com/actions/virtual-environments) that supports this
-    version of Node or newer.
-
-
-## Usage
-
-```yaml
-jobs:
-  job_id:
-    # Add "id-token" with the intended permissions.
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-
-    steps:
-    - uses: 'actions/checkout@v4'
-
-    - uses: 'google-github-actions/auth@v2'
-      with:
-        project_id: 'my-project'
-        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-```
-
-> [!NOTE]
->
-> Changing the `permissions` block may remove some default permissions. See the
-> [permissions documentation][github-perms] for more information.
-
-For more usage options, see the [examples](docs/EXAMPLES.md).
-
-
-## Inputs
-
-### Inputs: Workload Identity Federation
-
-> [!WARNING]
->
-> This option is [not supported by Firebase Admin
-> SDK](https://github.com/firebase/firebase-admin-node/issues/1377). Use Service
-> Account Key JSON authentication instead.
-
-The following inputs are for _authenticating_ to Google Cloud via Workload
-Identity Federation.
-
--   `workload_identity_provider`: (Required) The full identifier of the Workload
+    # Ignore generated credentials (Required) The full identifier of the Workload
     Identity Provider, including the project number, pool name, and provider
     name. If provided, this must be the full identifier which includes all
     parts:
